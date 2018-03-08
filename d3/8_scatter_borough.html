@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Drawing SVG circles with data</title>
+		<script src="https://d3js.org/d3.v4.min.js"></script> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+			#subDiv2 {
+			    height:70vh;
+			    width:95vw;  
+			}		
+		</style>
+	</head>
+	<body>
+		
+		
+		  <div id="subDiv1" name="subDiv1" title="Subdivision Div Element" style="color: #FF0000; border: 1px dotted black;">
+		  <p> text goes here</p>
+		  </div>
+		  <br />
+		  <div id="subDiv2" name="subDiv2" title="Subdivision Div Element" style="color: #FF00FF;border: 1px dashed black;">
+		   
+		  </div>
+	
+		<script type="text/javascript">
+
+			$( document ).ready(function() {
+
+			  	// var hh = $("#subDiv2").css('height');
+			  	// var ww = $("#subDiv2").css('width');
+				
+				var hh = $("#subDiv2").css('height').replace("px", "");
+				var ww = $("#subDiv2").css('width').replace("px", "");
+				//alert(ww + " and h : " + hh);
+			  
+
+
+
+			//$( document ).ready(function() {
+
+					
+				
+				var data = [[5,3], [10,17], [15,4], [2,8]];
+
+				//var data = d3.json("borough_4326.geojson",main)
+
+				d3.json("data/borough_4326.geojson",main)
+	    
+	    
+			    function main(data) {
+			    	//alert(data.features[0].properties.POP)
+
+			        //addLmaps()
+			        drawFeatures(data.features)    
+			    }
+	   
+	   			function drawFeatures(data) {
+				    var margin = {top: 20, right: 55, bottom: 60, left: 60}
+				      , width = ww - margin.left - margin.right
+				      , height = hh - margin.top - margin.bottom;
+				    
+				    var x = d3.scaleLinear()
+				              .domain([0, d3.max(data, function(d) { return d.properties.POP; })])
+				              .range([ 0, width ]);
+				    
+				    var y = d3.scaleLinear()
+				    	      .domain([0, d3.max(data, function(d) { return d.properties.AREA; })])
+				    	      .range([ height, 0 ]);
+				 
+				    var chart = d3.select('#subDiv2')
+					.append('svg:svg')
+					.attr('width', width + margin.right + margin.left)
+					.attr('height', height + margin.top + margin.bottom)
+					.attr('class', 'chart')
+
+				    var main = chart.append('g')
+					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+					.attr('width', width)
+					.attr('height', height)
+					.attr('class', 'main')   
+				        
+				    // draw the x axis
+				    var xAxis = d3.axisBottom()
+					.scale(x);
+
+				    main.append('g')
+					.attr('transform', 'translate(0,' + height + ')')
+					.attr('class', 'main axis date')
+					.call(xAxis);
+
+				    // draw the y axis
+				    var yAxis = d3.axisLeft()
+					.scale(y);
+
+				    main.append('g')
+					.attr('transform', 'translate(0,0)')
+					.attr('class', 'main axis date')
+					.call(yAxis);
+
+				    var g = main.append("svg:g"); 
+				    
+				    g.selectAll("scatter-dots")
+				      .data(data)
+				      .enter().append("svg:circle")
+			          .attr("cx", function (d,i) { return x(d.properties.POP); } )
+			          .attr("cy", function (d) { return y(d.properties.AREA); } )
+			          .attr("r", 8);
+		    	}
+		    });
+		</script>
+	</body>
+</html>

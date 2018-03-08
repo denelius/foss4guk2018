@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3 Demo: 5 divs</title>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
+		<style type="text/css">
+		
+			/*div.bar {
+				display: inline-block;
+				width: 20px;
+				height: 75px;
+				background-color: teal;
+			}*/
+
+			/*#15_elem {
+				background-color: red;
+			}*/
+
+			/*#here {
+				background-color: red;
+			}*/
+
+		
+		</style>
+	</head>
+	<body>
+		<div id="here">hello</div>
+		<script type="text/javascript">
+			// $( document ).ready(function() {
+		
+				var dataset = [ 5, 10, 15, 20, 25 ];
+				
+				d3.select("body").selectAll("div")
+					.data(dataset)
+					.enter()
+					.append("div")
+					// .attr("id", function(d) {
+					//     return d + "_elem";
+					// })
+					.attr("class", "bar");
+
+				//$("#15_elem").css('background-color', 'red');
+
+			// });
+			
+		</script>
+	</body>
+</html>

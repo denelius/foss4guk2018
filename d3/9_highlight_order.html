@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Drawing SVG circles with data</title>
+		<script src="https://d3js.org/d3.v4.min.js"></script> 
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+	</head>
+	<body>
+		
+		<div id="myDiv" name="myDiv" title="Example Div Element" style="font-family: Helvetica; font-size: 12pt; border: 1px solid black;">
+		  <div id="subDiv1" name="subDiv1" title="Subdivision Div Element" style="color: #FF0000; border: 1px dotted black;">
+		  
+		  </div>
+		  <br />
+		  <div id="subDiv2" name="subDiv2" title="Subdivision Div Element" style="color: #FF00FF;border: 1px dashed black;">
+		   
+		  </div>
+		</div>
+		<script type="text/javascript">
+			
+			//Width and height
+			var w = 1200;
+			var h = 550;
+			
+			//Data
+			var dataset = [ {"id":"elem_a", "val":5}, {"id":"elem_b", "val":10}, {"id":"elem_c", "val":15}, {"id":"elem_d", "val":20}, {"id":"elem_e", "val":25} ];
+
+
+			var dataset2 = [ 5, 10, 15, 20, 25 ];
+			
+			//Create SVG element
+			var svg = d3.select("#subDiv1")
+						.append("svg")
+						.attr("width", 300)
+						.attr("height", 100)
+			.append("g")
+		    	.attr("transform", "translate(0,0)");
+
+			var svg2 = d3.select("#subDiv2")
+			.append("svg")
+				.attr("width", 300)
+				.attr("height", 100)
+			.append("g")
+		    	.attr("transform", "translate(0,0)");
+
+			var circles = svg.selectAll("circle")
+			    .data(dataset)
+			    .enter()
+			    .append("circle");
+
+			var circles2 = svg2.selectAll("circle")
+			    .data(dataset)
+			    .enter()
+			    .append("circle");
+
+			circles.attr("cx", function(d, i) {
+						return (i * 50) + 25;
+					})
+				   .attr("cy", 50)
+				   .attr("id", function(d, i) { return d.id; })
+				   .attr("r", function(d) {
+						return d.val;
+				   })
+				   .style("fill", "blue");
+
+			circles2.attr("cx", function(d, i) {
+						return (i * 50) + 25;
+					})
+				   .attr("cy", 50)
+				   .attr("r", function(d) {
+						return d.val;
+				   })
+				   .style("fill", "red")
+				   .on("mouseover", function(d){
+                		d3.select("#" + d.id).style("fill", "yellow")
+            		})
+				   .on("mouseout", function(d){
+                		d3.select("#" + d.id).style("fill", "blue")
+            		}) ;
+
+		</script>
+	</body>
+</html>

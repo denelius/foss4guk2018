@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Drawing SVG circles with data</title>
+		<script src="https://d3js.org/d3.v4.min.js"></script> 
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			//Width and height
+			var w = 1200;
+			var h = 550;
+			
+			//Data
+			var dataset = [ 5, 10, 15, 20, 25 ];
+			//var dataset2 = [ 30, 35, 40, 45, 50 ];
+			
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", 400)
+						.attr("height", 600)
+			.append("g")
+		    	.attr("transform", "translate(0,0)");
+
+			// var svg2 = d3.select("body")
+			// .append("svg")
+			// 	.attr("width", 400)
+			// 	.attr("height", 600)
+			// .append("g")
+		 //    	.attr("transform", "translate(0,0)");
+
+			var circles = svg.selectAll("circle")
+			    .data(dataset)
+			    .enter()
+			    .append("circle");
+
+			// var circles2 = svg2.selectAll("circle")
+			//     .data(dataset2)
+			//     .enter()
+			//     .append("circle");
+
+			circles.attr("cx", function(d, i) {
+						return (i * 50) + 25;
+					})
+				   .attr("cy", 100)
+				   .attr("r", function(d) {
+						return d;
+				   })
+				   .style("fill", "blue");
+
+			// circles2.attr("cx", function(d, i) {
+			// 			return (i * 50) + 25;
+			// 		})
+			// 	   .attr("cy", 300)
+			// 	   .attr("r", function(d) {
+			// 			return d;
+			// 	   })
+			// 	   .style("fill", "red");
+
+		</script>
+	</body>
+</html>
