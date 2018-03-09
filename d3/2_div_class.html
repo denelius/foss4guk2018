@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<title>D3 Demo: 5 divs</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
 		<style type="text/css">
 		
 			/*div.bar {
@@ -14,7 +13,7 @@
 				background-color: teal;
 			}*/
 
-			/*#15_elem {
+			/*#elem_15 {
 				background-color: red;
 			}*/
 
@@ -28,22 +27,17 @@
 	<body>
 		<div id="here">hello</div>
 		<script type="text/javascript">
-			// $( document ).ready(function() {
 		
-				var dataset = [ 5, 10, 15, 20, 25 ];
-				
-				d3.select("body").selectAll("div")
-					.data(dataset)
-					.enter()
-					.append("div")
-					// .attr("id", function(d) {
-					//     return d + "_elem";
-					// })
-					.attr("class", "bar");
-
-				//$("#15_elem").css('background-color', 'red');
-
-			// });
+			var dataset = [ 5, 10, 15, 20, 25 ];
+			
+			d3.select("body").selectAll("div")
+				.data(dataset)
+				.enter()
+				.append("div")
+				// .attr("id", function(d) {
+				//     return "elem_" + d;
+				// })
+				.attr("class", "bar");
 			
 		</script>
 	</body>
