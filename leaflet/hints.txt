@@ -1,2 +1,8 @@
-Urban Innovation Centre FOSS4GUK 2018 
+EXCERCISE 1
+Place two slashes "//" in front of the code or text you wish to have the JavaScript interpreter ignore. When you place these two slashes, all text to the right of them will be ignored, until the next line. This is often used to inform others about your code
+
+EXCERCISE 2
+Retirieve coordinates for the following from the google maps url
+Geovation Hub - 1 Sekforde St FOSS4GUK 2018 
 The Bowler Pub and Kitchen 
+Did you remember to adjust the setView options?

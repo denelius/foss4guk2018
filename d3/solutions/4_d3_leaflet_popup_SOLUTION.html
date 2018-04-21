@@ -6,8 +6,6 @@
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
@@ -33,55 +31,44 @@
 	var markers = new L.FeatureGroup();
     // single marker on the map
 
-    var v = new L.marker([51.51, -0.09]);
-
-	v.on("click", function () {
-		alert("do anything");
-	});
-	markers.addLayer(v);
-
 	var m = new L.marker([51.5, -0.09]);
 
+	var count = 1;
 	m.on("click", function () {
-        var div = $('<div style="width: 200px; height: 200px;"><svg/></div>')[0];
-        m.bindPopup(div);
-        m.openPopup();
+		if (count == 1) {
+	        var div = $('<div style="width: 200px; height: 200px;"><svg/></div>')[0];
+	        m.bindPopup(div);
+	        m.openPopup();
 
-        var svg = d3.select(div).select("svg")
-            .attr("width", 200)
-            .attr("height", 200);
+	        var svg = d3.select(div).select("svg")
+	            .attr("width", 200)
+	            .attr("height", 200);
 
-        svg.append("circle")
-        .style("stroke", "gray")
-        .style("fill", "blue")
-        .attr("r", 100)
-        .attr("cx", 100)
-        .attr("cy", 100)
-        .on("mouseover", function () {
-            d3.select(this).style("fill", "red");
-        })
-        .on("mouseout", function () {
-            d3.select(this).style("fill", "blue");
-        });
+	        svg.append("rect")
+	        .style("stroke", "gray")
+	        .style("fill", "blue")
+	        .attr("x", 10)
+	        .attr("y", 10)
+	        .attr("width", 180)
+	        .attr("height", 180)
+	        .on("click", function () {
+	            d3.select(this).style("fill", getRandomColor());
+	        });
+	        count ++
+        }
     });
-
-	markers.addLayer(m);
+   
+    markers.addLayer(m);
     map.addLayer(markers);
-	//	d3.select("body").append("span").text("Hello, world!");
 
-	L.circle([51.508, -0.11], 500, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(map).bindPopup("I am a circle.");
-
-	L.polygon([
-		[51.509, -0.08],
-		[51.503, -0.06],
-		[51.51, -0.047]
-	]).addTo(map).bindPopup("I am a polygon.");
-
-	var popup = L.popup();
+    function getRandomColor() {
+	  var letters = '0123456789ABCDEF';
+	  var color = '#';
+	  for (var i = 0; i < 6; i++) {
+	    color += letters[Math.floor(Math.random() * 16)];
+	  }
+	  return color;
+	}
 
 </script>
 

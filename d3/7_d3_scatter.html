@@ -60,10 +60,6 @@
 								 .domain([0, 300])
 								 .range([h - padding, padding]);
 
-			var rScale = d3.scaleLinear()
-								 .domain([0, d3.max(dataset, function(d) { return d[1]; })])
-								 .range([2, 5]);
-
 			//Define X axis
 			var xAxis = d3.axisBottom()
 							  .scale(xScale);
@@ -77,8 +73,6 @@
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
-
-
 
 			//Create circles
 			svg.selectAll("circle")

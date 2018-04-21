@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3 Demo: 5 divs</title>
+		<title>D3 Demo: css</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<style type="text/css">
 		
@@ -11,21 +11,20 @@
 				width: 20px;
 				height: 75px;
 				background-color: teal;
-			}*/
+			}
 
-			/*#elem_15 {
+			#here {
+				background-color: red;
+			}
+
+			#elem_15 {
 				background-color: red;
 			}*/
-
-			/*#here {
-				background-color: red;
-			}*/
-
-		
+			
 		</style>
 	</head>
 	<body>
-		<div id="here">hello</div>
+		<p id="here">hello</p>
 		<script type="text/javascript">
 		
 			var dataset = [ 5, 10, 15, 20, 25 ];
@@ -34,9 +33,9 @@
 				.data(dataset)
 				.enter()
 				.append("div")
-				// .attr("id", function(d) {
-				//     return "elem_" + d;
-				// })
+				.attr("id", function(d) {
+				    return "elem_" + d;
+				})
 				.attr("class", "bar");
 			
 		</script>

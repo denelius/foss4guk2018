@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: svg</title>
+		<script src="https://d3js.org/d3.v4.min.js"></script> 
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			var w = 1200;
+			var h = 550;
+			
+			var dataset = [ 5, 10, 15, 20, 25 ];
+			
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", 400)
+						.attr("height", 600)
+						.append("g")
+		    			.attr("transform", "translate(0,0)");
+
+			var rectangles = svg.selectAll("rect")
+			    .data(dataset)
+			    .enter()
+			    .append("rect");
+
+			rectangles.attr("x", function(d, i) {
+						return (i * 21) + 25;
+					  })
+				      .attr("y", function(d) {
+						return 100 - (d*3);
+				      })
+				      .attr("width", 20)
+				      .attr("height", function(d) {
+						return d*3;
+				      })
+				      .style("fill", "blue");
+
+		</script>
+	</body>
+</html>

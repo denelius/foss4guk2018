@@ -6,53 +6,33 @@
 		<script src="https://d3js.org/d3.v4.min.js"></script> 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<style type="text/css">
-			/* No style rules here yet */
+	
 			#subDiv2 {
 			    height:70vh;
-			    width:95vw;  
-			}		
+			    width:100%;  
+			}	
+
 		</style>
 	</head>
 	<body>
-		
-		
+
 		  <div id="subDiv1" name="subDiv1" title="Subdivision Div Element" style="color: #FF0000; border: 1px dotted black;">
 		  <p> text goes here</p>
 		  </div>
 		  <br />
 		  <div id="subDiv2" name="subDiv2" title="Subdivision Div Element" style="color: #FF00FF;border: 1px dashed black;">
-		   
 		  </div>
 	
 		<script type="text/javascript">
 
 			$( document ).ready(function() {
-
-			  	// var hh = $("#subDiv2").css('height');
-			  	// var ww = $("#subDiv2").css('width');
 				
 				var hh = $("#subDiv2").css('height').replace("px", "");
 				var ww = $("#subDiv2").css('width').replace("px", "");
-				//alert(ww + " and h : " + hh);
-			  
 
-
-
-			//$( document ).ready(function() {
-
-					
-				
-				var data = [[5,3], [10,17], [15,4], [2,8]];
-
-				//var data = d3.json("borough_4326.geojson",main)
-
-				d3.json("data/borough_4326.geojson",main)
-	    
+				d3.json("../data/borough_4326.geojson",main)
 	    
 			    function main(data) {
-			    	//alert(data.features[0].properties.POP)
-
-			        //addLmaps()
 			        drawFeatures(data.features)    
 			    }
 	   
@@ -106,9 +86,14 @@
 				      .enter().append("svg:circle")
 			          .attr("cx", function (d,i) { return x(d.properties.POP); } )
 			          .attr("cy", function (d) { return y(d.properties.AREA); } )
-			          .attr("r", 8);
+			          .attr("r", 8)
+			          .on("click", function(d){
+			              //alert(d.properties.BOROUGH)
+			              document.getElementsByTagName("p")[0].innerHTML=d.properties.BOROUGH + " -  Pop Density: " + Math.round(d.properties.POP/d.properties.AREA)
+			          }) ;
 		    	}
 		    });
+		    
 		</script>
 	</body>
 </html>

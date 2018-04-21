@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3 Demo: css</title>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<style type="text/css">
+		
+			div.bar {
+				display: inline-block;
+				width: 20px;
+				height: 75px;
+				background-color: teal;
+				margin-right: 2px;
+			}
+
+			#here {
+				background-color: red;
+			}
+
+			#elem_15 {
+				background-color: red;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<p id="here">hello</p>
+		<script type="text/javascript">
+		
+			var dataset = [ 5, 10, 15, 20, 25 ];
+			
+			d3.select("body").selectAll("div")
+				.data(dataset)
+				.enter()
+				.append("div")
+				.style("height", function(d) {
+				    return d*5 + "px";
+				})
+				.attr("id", function(d) {
+				    return "elem_" + d;
+				})
+				.attr("class", "bar");
+			
+		</script>
+	</body>
+</html>
